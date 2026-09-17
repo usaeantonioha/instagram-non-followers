@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Non-Followers Finder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fab fa-instagram"></i>
+                <h1>Non-Followers Finder</h1>
+            </div>
+            <p class="subtitle">Descubre quién no te sigue de vuelta en Instagram</p>
+        </header>
+
+        <!-- Login Form -->
+        <div class="card login-card" id="loginSection">
+            <h2><i class="fas fa-lock"></i> Iniciar Sesión</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">
+                        <i class="fas fa-user"></i> Usuario
+                    </label>
+                    <input type="text" id="username" placeholder="tu_usuario" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">
+                        <i class="fas fa-key"></i> Contraseña
+                    </label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary" id="analyzeBtn">
+                    <i class="fas fa-search"></i> Analizar Cuenta
+                </button>
+            </form>
+            <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>⚠️ Esta herramienta usa scraping. Úsala bajo tu propio riesgo. 
+                   No la uses en tu cuenta principal.</p>
+            </div>
+        </div>
+
+        <!-- Loading Section -->
+        <div class="loading-section hidden" id="loadingSection">
+            <div class="spinner"></div>
+            <h3>Analizando tu cuenta...</h3>
+            <p id="loadingStatus">Iniciando sesión...</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="results-section hidden" id="resultsSection">
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon followers">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Seguidores</h3>
+                        <p class="stat-number" id="followersCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon following">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Siguiendo</h3>
+                        <p class="stat-number" id="followingCount">0</p>
+                    </div>
+                </div>
+                <div class="stat-card non-followers">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-times"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>No Seguidores</h3>
+                        <p class="stat-number" id="nonFollowersCount">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Non-Followers List -->
+            <div class="non-followers-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-list"></i> Lista de No Seguidores</h2>
+                    <button class="btn-secondary" id="exportBtn">
+                        <i class="fas fa-download"></i> Exportar JSON
+                    </button>
+                </div>
+                <div class="users-list" id="usersList">
+                    <!-- Los usuarios se cargarán dinámicamente -->
+                </div>
+            </div>
+
+            <button class="btn-primary" id="newAnalysisBtn">
+                <i class="fas fa-redo"></i> Nuevo Análisis
+            </button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
